@@ -38,7 +38,7 @@ parser.add_argument('--bidirectional', action='store_true',
                     help="Wether to use Bidirectionality for LSTM and GRU.")
 parser.add_argument('--save_best_model', action='store_true',
                     help="Wether to save best model for each encoder type.")
-parser.add_argument('--weight_class', choices=['uniform', 'balanced', 'inverse'], default='uniform',
+parser.add_argument('--class_weight', choices=['uniform', 'balanced', 'inverse'], default='uniform',
                     help="Wether to weigh the class based on the class frequency. Default: Uniform")
 parser.add_argument('--loss', choices=['cross_entropy', 'focal'], default='cross_entropy',
                     help="Loss function to use. Default: cross_entropy")
@@ -72,7 +72,7 @@ def main():
     # Parse and load the arguments
     args = parser.parse_args()
     embedding_type = args.word_embed
-    weight_class = args.weight_class
+    class_weight = args.class_weight
     loss_fc = args.loss
     pooling = args.pooling
     encoder_type = args.encoder
@@ -92,7 +92,7 @@ def main():
     if not os.path.exists(root_workdir):
         os.makedirs(root_workdir)
 
-    scenario_dir = os.path.join(encoder_type, weight_class, loss_fc, pooling, str(
+    scenario_dir = os.path.join(encoder_type, class_weight, loss_fc, pooling, str(
         n_layers), str(n_heads), 'bidirectional' if bidirectional else 'unidirectional')
     workdir = os.path.join(root_workdir, scenario_dir)
     print('[baseline-multiclass] - Current Workdir: ', workdir)
@@ -138,9 +138,9 @@ def main():
         raise SystemExit("The dataset option is not valid.")
 
     # Compute the class weights
-    if weight_class == 'balanced':
+    if class_weight == 'balanced':
         class_weights = compute_class_weight('balanced', classes=[0, 1, 2, 3], y=dataset["multiclass_label"].to_list())
-    elif weight_class == 'inverse':
+    elif class_weight == 'inverse':
         class_weights = inverse_freq(dataset["multiclass_label"].to_list())
     else:   # uniform
         class_weights = np.ones([4])

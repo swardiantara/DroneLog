@@ -17,22 +17,22 @@ for dataset in "${datasets[@]}"; do
                 for loss in "${losses[@]}"; do
                     if [ "$encoder" = "linear" ]; then
                         for pooling in "${poolings[@]}"; do
-                            python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder linear --pooling "$pooling" --weight_class "$weight" --loss "$loss"
+                            python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder linear --pooling "$pooling" --class_weight "$weight" --loss "$loss"
                         done
                     else
                         for n_layer in "${n_layers[@]}"; do
                             if [ "$encoder" = "transformer" ]; then
                                 for n_head in "${n_heads[@]}"; do
                                     for pooling in "${poolings[@]}"; do
-                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --n_heads "$n_head" --pooling "$pooling" --weight_class "$weight" --loss "$loss"
+                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --n_heads "$n_head" --pooling "$pooling" --class_weight "$weight" --loss "$loss"
                                     done
                                 done
                             else
                                 for bidirectional in "${bidirectionals[@]}"; do
                                     if [ "$bidirectional" = true ]; then
-                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --bidirectional --weight_class "$weight" --loss "$loss"
+                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --bidirectional --class_weight "$weight" --loss "$loss"
                                     else
-                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --weight_class "$weight" --loss "$loss"
+                                        python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder "$encoder" --n_layers "$n_layer" --class_weight "$weight" --loss "$loss"
                                     fi
                                 done
                             fi
