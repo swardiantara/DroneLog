@@ -410,7 +410,7 @@ def main():
                 json.dump(arguments_dict, json_file, indent=4)
                 
             # Save the model's file
-            torch.save(best_model.state_dict(), os.path.join(best_model_dir, 'pytorch_model.pt'))
+            torch.save(best_model_state, os.path.join(best_model_dir, 'pytorch_model.pt'))
         else:
             # Check the previous best and compare to current model's performance
             eval_report_path = os.path.join(best_model_dir, "evaluation_report.json")
@@ -430,7 +430,7 @@ def main():
                         json.dump(arguments_dict, json_file, indent=4)
                         
                     # Save the model's file
-                    torch.save(best_model.state_dict(), os.path.join(best_model_dir, 'pytorch_model.pt'))
+                    torch.save(best_model_state, os.path.join(best_model_dir, 'pytorch_model.pt'))
 
         
     return 0
