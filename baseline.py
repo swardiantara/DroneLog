@@ -473,7 +473,7 @@ def main():
         workdir, "prediction.csv"), index=False)
 
     # Calculate multiclass classification report
-    accuracy = accuracy_score(tests_decoded, preds_decoded, digits=5)
+    accuracy = accuracy_score(tests_decoded, preds_decoded)
     evaluation_report = classification_report(
         tests_decoded, preds_decoded, digits=5)
     classification_report_result = classification_report(
