@@ -413,11 +413,14 @@ def main():
             torch.save(best_model_state, os.path.join(best_model_dir, 'pytorch_model.pt'))
         else:
             # Check the previous best and compare to current model's performance
+            print('folder exists')
             eval_report_path = os.path.join(best_model_dir, "evaluation_report.json")
             with open(eval_report_path) as eval_report_file:
                 eval_report = json.load(eval_report_file)
+                print(f"new acc: {accuracy}, old: {eval_report['accuracy']}")
                 if accuracy > eval_report['accuracy']:
                     # Save the experimental logs
+                    print('replace the whole thing')
                     plot_loss.get_figure().savefig(os.path.join(best_model_dir, "train_val_loss.pdf"), format='pdf', bbox_inches='tight')
                     plot_accuracy.get_figure().savefig(os.path.join(best_model_dir, "train_val_acc.pdf"), format='pdf', bbox_inches='tight')
                     plot_f1.get_figure().savefig(os.path.join(best_model_dir, "train_val_f1.pdf"), format='pdf', bbox_inches='tight')
