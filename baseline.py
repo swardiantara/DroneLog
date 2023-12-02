@@ -356,6 +356,8 @@ def main():
         tests_decoded, preds_decoded, digits=5)
     classification_report_result = classification_report(
         tests_decoded, preds_decoded, digits=5, output_dict=True)
+    classification_report_result['macro_avg'] = classification_report_result.pop('macro avg')
+    classification_report_result['weighted_avg'] = classification_report_result.pop('weighted avg')
     micro_pre, micro_rec, micro_f1, support = precision_recall_fscore_support(tests_decoded, preds_decoded, average='micro')
     classification_report_result['micro_avg'] = {
         "precision": micro_pre,
