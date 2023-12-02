@@ -1,7 +1,7 @@
 #!/bin/bash
 datasets=( filtered unfiltered )
 word_embeds=( bert )
-encoders=( transformer lstm gru none )
+encoders=( transformer lstm gru linear )
 weight_class=( uniform balanced inverse )
 losses=( cross_entropy focal )
 poolings=( cls max min mean )
@@ -15,9 +15,9 @@ for dataset in "${datasets[@]}"; do
         for encoder in "${encoders[@]}"; do
             for weight in "${weight_class[@]}"; do
                 for loss in "${losses[@]}"; do
-                    if [ "$encoder" = "none" ]; then
+                    if [ "$encoder" = "linear" ]; then
                         for pooling in "${poolings[@]}"; do
-                            python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder none --pooling "$pooling" --weight_class "$weight" --loss "$loss"
+                            python baseline.py --dataset "$dataset" --word_embed "$word_embed" --encoder linear --pooling "$pooling" --weight_class "$weight" --loss "$loss"
                         done
                     else
                         for n_layer in "${n_layers[@]}"; do
