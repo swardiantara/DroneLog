@@ -1,0 +1,23 @@
+{
+    "dataset": "filtered",
+    "output_dir": "baseline",
+    "word_embed": "bert",
+    "encoder": "gru",
+    "pooling": "mean",
+    "freeze_embedding": false,
+    "bidirectional": false,
+    "save_best_model": false,
+    "class_weight": "inverse",
+    "loss": "focal",
+    "n_heads": 1,
+    "n_layers": 3,
+    "n_epochs": 10,
+    "scenario_dir": "experiments/baseline/filtered/gru/inverse/focal/mean/3/1/unidirectional",
+    "best_epoch": 5,
+    "train_started_at": "2023-12-03 04:59:57.894526",
+    "train_finished_at": "2023-12-03 05:00:26.526113",
+    "train_duration": "28.631587 seconds",
+    "eval_started_at": "2023-12-03 05:00:26.932466",
+    "eval_finished_at": "2023-12-03 05:00:27.118799",
+    "eval_duration": "0.186333 seconds"
+}

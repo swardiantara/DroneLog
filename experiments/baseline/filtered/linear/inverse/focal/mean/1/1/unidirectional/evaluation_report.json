@@ -24,13 +24,13 @@
         "support": 40
     },
     "accuracy": 0.811965811965812,
-    "macro avg": {
+    "macro_avg": {
         "precision": 0.7694704570791527,
         "recall": 0.7156864937388193,
         "f1-score": 0.7341294591775838,
         "support": 117
     },
-    "weighted avg": {
+    "weighted_avg": {
         "precision": 0.8093167157381204,
         "recall": 0.811965811965812,
         "f1-score": 0.8064142638828875,

@@ -1,0 +1,23 @@
+{
+    "dataset": "unfiltered",
+    "output_dir": "baseline",
+    "word_embed": "bert",
+    "encoder": "transformer",
+    "pooling": "mean",
+    "freeze_embedding": false,
+    "bidirectional": false,
+    "save_best_model": false,
+    "class_weight": "balanced",
+    "loss": "focal",
+    "n_heads": 4,
+    "n_layers": 3,
+    "n_epochs": 10,
+    "scenario_dir": "experiments/baseline/unfiltered/transformer/balanced/focal/mean/3/4/unidirectional",
+    "best_epoch": 8,
+    "train_started_at": "2023-12-03 08:52:59.264475",
+    "train_finished_at": "2023-12-03 08:54:38.595825",
+    "train_duration": "99.33135 seconds",
+    "eval_started_at": "2023-12-03 08:54:39.068331",
+    "eval_finished_at": "2023-12-03 08:54:39.674014",
+    "eval_duration": "0.605683 seconds"
+}
