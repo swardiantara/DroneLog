@@ -35,6 +35,43 @@ class CustomDataset(Dataset):
         }
 
 
+
+# Define custom dataset
+class MultitaskDataset(Dataset):
+    def __init__(self, dataframe, tokenizer, max_length):
+        self.data = dataframe
+        self.tokenizer = tokenizer
+        self.max_length = max_length
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        text = self.data.iloc[index]["message"]
+        labels_multitask = self.data.iloc[index]["multi_task_label"]
+        class_label = self.data.iloc[index]["label"]
+
+        encoding = self.tokenizer(
+            text,
+            add_special_tokens=True,
+            truncation=True,
+            padding="max_length",
+            max_length=self.max_length,
+            return_tensors="pt",
+        )
+
+        input_ids = encoding["input_ids"].squeeze()
+        attention_mask = encoding["attention_mask"].squeeze()
+
+        return {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "labels_multitask_index": labels_multitask,
+            "class_label": class_label,
+            "labels_multitask": torch.tensor(labels_multitask, dtype=torch.float32),
+        }
+
+
 def assert_data_size(dataframe, batch_size):
     # Assert the data split w.r.t batch size
     num_to_delete = len(dataframe) % batch_size
@@ -68,7 +105,7 @@ def label_binary_mapping(label):
             return label
 
 
-def label_multiclass_mapping_101(label):
+def label2multitask101(label):
     # normal    = [0, 0, 0, 0]
     # low       = [0, 1, 0, 1]
     # medium    = [0, 0, 1, 1]  -> means that this is an anomaly and the anomaly is medium
@@ -77,15 +114,23 @@ def label_multiclass_mapping_101(label):
     low_anomaly = 1 if label == "low" else 0
     medium_anomaly = 1 if label == "medium" else 0
     high_anomaly = 1 if label == "high" else 0
+    # To comply with the class weights from utils.preprocessing.inverse_freq
+    # and sklearn.utils.class_weight import compute_class_weight,
+    # the order made alphabetically.
     return [high_anomaly, low_anomaly, medium_anomaly, normal]
+    # return [normal, low_anomaly, medium_anomaly, high_anomaly]
     
-def label_multiclass_mapping_111(label):
+def label2multitask111(label):
     # normal    = [0, 0, 0, 0]
     # low       = [0, 1, 0, 1]  -> means that this is an anomaly and the anomaly is low
     # medium    = [0, 1, 1, 1]
     # high      = [1, 1, 1, 1]
     normal = 0 if label == "normal" else 1
     low_anomaly = 0 if label == "normal" else 1
-    medium_anomaly = 1 if label == "medium" or label == "high" else 0
+    medium_anomaly = 1 if (label == "medium" or label == "high") else 0
     high_anomaly = 1 if label == "high" else 0
+    # To comply with the class weights from utils.preprocessing.inverse_freq
+    # and sklearn.utils.class_weight import compute_class_weight,
+    # the order made alphabetically.
     return [high_anomaly, low_anomaly, medium_anomaly, normal]
+    # return [normal, low_anomaly, medium_anomaly, high_anomaly]
