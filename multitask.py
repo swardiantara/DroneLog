@@ -163,7 +163,7 @@ def main():
     class_weights = torch.tensor(class_weights, dtype=torch.float32)
 
     # Split the data into train and test sets
-    if args.dataset != 'fold5':
+    if args.dataset != 'filtered':
         train_df, test_df = train_test_split(dataset, test_size=0.2, random_state=42)
 
     # Check the split results, if the last batch contains only 1 instance
