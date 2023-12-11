@@ -36,8 +36,8 @@ parser.add_argument('--word_embed', type=str, choices=[
                     'bert'], default='bert', help='Type of Word Embdding used. Default: BERT-base')
 parser.add_argument('--encoder', type=str, choices=['transformer', 'lstm', 'gru', 'linear'], default='linear',
                     help="Encoder Architecture used to perform computation. Default: Linear.")
-parser.add_argument('--pooling', type=str, choices=['cls', 'max', 'min', 'mean'], default='cls',
-                    help="Pooling mechanism to get final representation for non-RNN models. Default: BERT [CLS]")
+parser.add_argument('--pooling', type=str, choices=['cls', 'max', 'min', 'mean'], default='mean',
+                    help="Pooling mechanism to get final representation for non-RNN models. Default: mean")
 parser.add_argument('--freeze_embedding', action='store_true',
                     help="Wether to freeze the pre-trained embedding's parameter.")
 parser.add_argument('--bidirectional', action='store_true',

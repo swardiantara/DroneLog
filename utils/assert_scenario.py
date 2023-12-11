@@ -8,7 +8,9 @@ def assert_baseline(args) -> None:
     if args.encoder == 'transformer' or args.encoder == 'linear':
         if args.bidirectional:
             raise SystemExit("Bidirectionality only supported in LSTM or GRU encoder.")
-        
-    if args.encoder == 'lstm' or args.encoder == 'gru':
+    else:
         if args.pooling != 'mean':
-            raise SystemExit("No pooling can be performed for RNN-based models.")
+            raise SystemExit("No pooling can be perform for RNN-based models.")
+    # if args.encoder == 'lstm' or args.encoder == 'gru':
+    #     if args.pooling != 'mean':
+    #         raise SystemExit("No pooling can be performed for RNN-based models.")
