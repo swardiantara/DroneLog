@@ -1,0 +1,23 @@
+{
+    "dataset": "unfiltered",
+    "output_dir": "transsentlog",
+    "word_embed": "bert",
+    "encoder": "transformer",
+    "pooling": "max",
+    "freeze_embedding": false,
+    "bidirectional": false,
+    "save_best_model": false,
+    "class_weight": "inverse",
+    "loss": "focal",
+    "n_heads": 2,
+    "n_layers": 2,
+    "n_epochs": 10,
+    "scenario_dir": "experiments/transsentlog/unfiltered/transformer/inverse/focal/max/2/2/unidirectional",
+    "best_epoch": 8,
+    "train_started_at": "2023-12-11 23:02:15.411719",
+    "train_finished_at": "2023-12-11 23:03:52.253437",
+    "train_duration": "96.841718 seconds",
+    "eval_started_at": "2023-12-11 23:03:52.675073",
+    "eval_finished_at": "2023-12-11 23:03:53.277150",
+    "eval_duration": "0.602077 seconds"
+}
