@@ -1,0 +1,23 @@
+{
+    "dataset": "filtered",
+    "output_dir": "neurallog",
+    "word_embed": "bert",
+    "encoder": "transformer",
+    "pooling": "cls",
+    "freeze_embedding": false,
+    "bidirectional": false,
+    "save_best_model": false,
+    "class_weight": "balanced",
+    "loss": "focal",
+    "n_heads": 12,
+    "n_layers": 1,
+    "n_epochs": 10,
+    "scenario_dir": "experiments/neurallog/filtered/transformer/balanced/focal/cls/1/12/unidirectional",
+    "best_epoch": 8,
+    "train_started_at": "2023-12-13 19:10:10.216943",
+    "train_finished_at": "2023-12-13 19:10:34.314141",
+    "train_duration": "24.097198 seconds",
+    "eval_started_at": "2023-12-13 19:10:34.653198",
+    "eval_finished_at": "2023-12-13 19:10:34.808698",
+    "eval_duration": "0.1555 seconds"
+}
